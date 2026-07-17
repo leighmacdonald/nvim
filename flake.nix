@@ -41,6 +41,7 @@
           default = nvimConfiguration.neovim.overrideAttrs (old: {
             meta = old.meta // {
               license = pkgs.lib.licenses.mit;
+              platforms = systems;
             };
           });
         }
