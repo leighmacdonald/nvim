@@ -9,25 +9,45 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nvf,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux"; # Adjust for your system, e.g., "aarch64-linux" or "aarch64-darwin"
-    pkgs = nixpkgs.legacyPackages.${system};
-
-    # Build the nvf configuration
-    nvimConfiguration = nvf.lib.neovimConfiguration {
-      inherit pkgs;
-      modules = [
-        ./modules
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nvf,
+      ...
+    }@inputs:
+    let
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
       ];
+
+      forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f system);
+    in
+    {
+      packages = forEachSystem (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          nvimConfiguration = nvf.lib.neovimConfiguration {
+            inherit pkgs;
+            modules = [
+              ./modules
+            ];
+          };
+        in
+        {
+          default = nvimConfiguration.neovim;
+        }
+      );
+
+      nixosModules.default = { pkgs, ... }: {
+        programs.neovim.package = self.packages.${pkgs.system}.default;
+      };
+
+      homeManagerModules.default = { pkgs, ... }: {
+        programs.neovim.package = self.packages.${pkgs.system}.default;
+      };
     };
-  in {
-    packages.${system} = {
-      default = nvimConfiguration.neovim;
-    };
-  };
 }
