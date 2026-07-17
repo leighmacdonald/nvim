@@ -1,0 +1,49 @@
+{pkgs, ...}: {
+  imports = [
+    ./autocomplete.nix
+    #./autopairs.nix
+    ./comments.nix
+    ./cursorline.nix
+    #./dashboard.nix
+    ./db.nix
+    ./debugger.nix
+    ./diagnostics.nix
+    ./direnv.nix
+    ./formatter.nix
+    ./gitsigns.nix
+    ./icon-picker.nix
+    ./images.nix
+    ./languages.nix
+    ./lsp.nix
+    ./mini.nix
+    #./neogen.nix
+    #./neogit.nix
+    #./neotest.nix
+    #./neotree.nix
+    ./noice.nix
+    ./notify.nix
+    ./nvim-surround.nix
+    ./opencode.nix
+    ./options.nix
+    ./plenary.nix
+    #./projects.nix
+    ./snacks.nix
+    ./statusline.nix
+    #./surround.nix
+    ./tabline.nix
+    #./telescope.nix
+    #./todo.nix
+    ./treesitter.nix
+    ./trouble.nix
+    #./web-devicons.nix
+    ./which-key.nix
+  ];
+  vim.extraPackages = with pkgs; [
+    ripgrep
+    fd
+    fzf
+    git
+    wl-clipboard
+  ];
+  # stylix.targets.nvf.enable = true;
+}
