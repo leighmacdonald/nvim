@@ -55,7 +55,7 @@
       };
     };
     spellcheck = {
-      enable = true;
+      enable = false;
       programmingWordlist.enable = false;
       #vim-dirtytalk.enable = true;
     };
