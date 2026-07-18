@@ -1,12 +1,5 @@
 {pkgs, ...}: {
   vim = {
-    #debugger = {
-    #nvim-dap = {
-    #enable = true;
-    #ui.enable = true;
-    #};
-    #};
-
     extraPlugins = with pkgs.vimPlugins; {
       nvim-dap = {
         package = nvim-dap;

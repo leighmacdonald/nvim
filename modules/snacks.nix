@@ -58,7 +58,7 @@
           enabled = true;
         };
         scroll = {
-          enabled = false;
+          enabled = true;
         };
         statuscolumn = {
           enabled = true;
