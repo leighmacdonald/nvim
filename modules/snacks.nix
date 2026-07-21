@@ -11,6 +11,9 @@
         };
         explorer = {
           enabled = true;
+          trash = false;
+          replace_netrw = true;
+          gis_status = true;
         };
         gh = {enabled = true;};
         image = {
@@ -29,6 +32,7 @@
         };
         picker = {
           enabled = true;
+          hidden = true;
           # win = {
           #      input = {
           #        keys = {
