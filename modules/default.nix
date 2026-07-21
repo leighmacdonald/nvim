@@ -1,10 +1,12 @@
 {pkgs, ...}: {
   imports = [
     ./autocomplete.nix
+    #./codecompanion.nix
     ./db.nix
     ./debugger.nix
     ./images.nix
     ./languages.nix
+    ./llama.nix
     ./lsp.nix
     ./noice.nix
     ./opencode.nix
@@ -16,6 +18,7 @@
     # Only contains core binaries used for nvim itself, Language servers, etc, are expected to
     # be provided by projects and their local shell.nix enn which gets activated.
     extraPackages = with pkgs; [
+      sqlite
       ripgrep
       fd
       fzf
@@ -40,7 +43,8 @@
     mini = {
       pairs.enable = true;
       icons.enable = true;
-      tabline.enable = true;
+      tabline.enable = false;
+      animate.enable = true;
       #dashboard.dashboard-nvim.enable = true;
     };
     utility = {
@@ -51,7 +55,7 @@
       surround.enable = true;
       preview.markdownPreview = {
         enable = true;
-        autoStart = true;
+        autoStart = false;
       };
     };
     spellcheck = {

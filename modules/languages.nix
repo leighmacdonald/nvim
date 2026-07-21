@@ -1,8 +1,15 @@
-{
+{lib, ...}: {
   # home.packages = with pkgs; [
 
   # ];
   vim = {
+    pluginRC.dap-go-outputmode = lib.nvim.dag.entryAfter ["nvim-dap-go"] ''
+      require('dap-go').setup({
+        delve = {
+          outputMode = "remote",
+        }
+      })
+    '';
     languages = {
       enableDAP = true;
       enableExtraDiagnostics = true;
@@ -24,6 +31,9 @@
         enable = true;
         format = {
           type = ["gofumpt"];
+        };
+        dap = {
+          enable = true;
         };
       };
       html = {
