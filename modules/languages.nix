@@ -1,9 +1,9 @@
-{lib, ...}: {
+{ lib, ... }: {
   # home.packages = with pkgs; [
 
   # ];
   vim = {
-    pluginRC.dap-go-outputmode = lib.nvim.dag.entryAfter ["nvim-dap-go"] ''
+    pluginRC.dap-go-outputmode = lib.nvim.dag.entryAfter [ "nvim-dap-go" ] ''
       require('dap-go').setup({
         delve = {
           outputMode = "remote",
@@ -30,7 +30,7 @@
       go = {
         enable = true;
         format = {
-          type = ["gofumpt"];
+          type = [ "gofumpt" ];
         };
         dap = {
           enable = true;
@@ -48,29 +48,29 @@
       };
       markdown = {
         enable = true;
-        lsp.servers = ["marksman"];
+        lsp.servers = [ "marksman" ];
         # format.type = [ "prettier" ];
         extensions.markview-nvim.enable = true;
       };
       nix = {
         enable = true;
-        lsp.servers = ["nixd"];
-        format.type = ["alejandra"];
+        lsp.servers = [ "nixd" ];
+        format.type = [ "alejandra" ];
       };
       python = {
         enable = true;
-        dap.debugger = ["debugpy"];
-        format.type = ["black"];
-        lsp.servers = ["basedpyright"];
+        dap.debugger = [ "debugpy" ];
+        format.type = [ "black" ];
+        lsp.servers = [ "basedpyright" ];
       };
       sql = {
         enable = true;
-        extraDiagnostics.types = ["sqlfluff"];
-        format.type = ["sqlfluff"];
+        extraDiagnostics.types = [ "sqlfluff" ];
+        format.type = [ "sqlfluff" ];
       };
       rust = {
         enable = true;
-        format.type = ["rustfmt"];
+        format.type = [ "rustfmt" ];
         extensions.crates-nvim = {
           enable = true;
           setupOpts = {
@@ -96,10 +96,18 @@
           "typescript-language-server"
         ];
       };
+
       yaml = {
         enable = true;
-        lsp.servers = ["yaml-language-server"];
+        lsp.servers = [ "yaml-language-server" ];
       };
     };
   };
+
+  vim.lsp.servers.typescript-language-server.filetypes = lib.mkForce [
+    "typescript"
+    "typescriptreact"
+    "javascript"
+    "javascriptreact"
+  ];
 }
